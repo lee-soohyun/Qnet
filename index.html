@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Q-Net 마이페이지 - 시험결과보기 및 결과확인</title>
+    <title>Q-Net 마이페이지 - 시험결과보기</title>
     <style>
         /* 기본 스타일 리셋 */
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Malgun Gothic', sans-serif; }
@@ -49,9 +49,10 @@
         .result-table th { background-color: #eef2f8; color: #333; font-weight: bold; padding: 15px 10px; border-top: 1px solid #ccc; border-bottom: 1px solid #ccc; }
         .result-table td { padding: 15px 10px; border-bottom: 1px solid #e8eef4; }
         
+        /* 링크 클릭 스타일 활성화 */
         .exam-number { color: #0066cc; text-decoration: none; cursor: pointer; font-weight: bold; display: inline-block; }
         .exam-number:hover { color: #0044aa; text-decoration: underline; }
-        .exam-number::after { content: ' >'; font-size: 11px; text-decoration: none; display: inline-block; }
+        .exam-number::after { content: ' >'; font-size: 11px; text-decoration: none !important; display: inline-block; }
         
         .status { font-weight: bold; }
         .status.pass { color: #0066cc; }
@@ -61,40 +62,6 @@
         .btn-search:hover { background-color: #f4f4f4; }
 
         .congratulations-box { background-color: #fafbfc; border: 1px solid #e1e4e9; padding: 20px; text-align: center; font-size: 15px; border-radius: 4px; color: #444; margin-bottom: 50px; }
-        .congratulations-box strong { color: #0066cc; font-weight: bold; }
-
-        /* ======================================================== */
-        /* 3. 하단 [결과확인] 상세 영역 스타일 */
-        /* ======================================================== */
-        .detail-section { 
-            display: none; 
-            border-top: 1px solid #ddd; 
-            padding-top: 40px; 
-            margin-top: 20px; 
-        }
-        
-        .info-top-alert { font-size: 14px; line-height: 1.6; color: #333; margin-bottom: 30px; position: relative; padding-left: 12px; }
-        .info-top-alert::before { content: '•'; position: absolute; left: 0; color: #0066cc; }
-        .info-top-alert red { color: #ff3333; font-weight: bold; }
-
-        .section-sub-title { font-size: 24px; font-weight: bold; color: #111; margin-bottom: 15px; }
-
-        /* 세부 테이블 제목 바 모양 */
-        .detail-table-title { background-color: #d9e2f3; border: 1px solid #b4c6e7; padding: 12px 20px; font-size: 14px; font-weight: bold; color: #222; border-bottom: none; }
-
-        /* 결과확인 상세 스코어 테이블 정밀 매칭 스타일 */
-        .detail-table { width: 100%; border-collapse: collapse; font-size: 14px; text-align: center; margin-bottom: 25px; border: 1px solid #b4c6e7; }
-        .detail-table th { background-color: #d9e2f3; color: #222; font-weight: bold; padding: 15px 10px; border-right: 1px solid #b4c6e7; border-bottom: 1px solid #b4c6e7; }
-        .detail-table td { padding: 18px 10px; border-bottom: 1px solid #e1e4e9; border-right: 1px solid #e1e4e9; background-color: #fff; color: #111; }
-        .detail-table th:last-child, .detail-table td:last-child { border-right: none; }
-        
-        .border-dotted { border-bottom: 1px dotted #ccc !important; }
-
-        .notice-container { font-size: 13px; line-height: 1.8; color: #444; }
-        .notice-item { margin-bottom: 12px; position: relative; padding-left: 20px; }
-        .notice-item .icon { position: absolute; left: 0; top: 1px; color: #0066cc; font-weight: bold; }
-        .notice-item a { color: #0066cc; text-decoration: underline; font-weight: bold; }
-        .notice-item highlight { color: #ff3333; }
     </style>
 </head>
 <body>
@@ -143,7 +110,7 @@
             <div class="breadcrumb">홈 &gt; 마이페이지 &gt; 원서접수관리 &gt; 시험결과 확인</div>
             <h1 class="page-title">시험결과보기</h1>
 
-            <!-- 상단 요약 테이블 -->
+            <!-- 상단 요약 테이블 (클릭 시 각각 다른 데이터를 새 창으로 전달하도록 구성) -->
             <table class="result-table">
                 <thead>
                     <tr>
@@ -159,7 +126,7 @@
                     <tr>
                         <td>2026년 정기 기사 2회</td>
                         <td>실기</td>
-                        <td><span class="exam-number" onclick="updateAndScrollDetail('26201106', '2026년 정기 기사 2회 (실기) - 정보처리기사', '필답형', '68', '68', '합격', '#0066cc')">26201106</span></td>
+                        <td><span class="exam-number" onclick="openResultWindow('26201106', '2026년 정기 기사 2회 (실기) - 정보처리기사', '필답형', '68', '68', '합격', '#0066cc')">26201106</span></td>
                         <td>정보처리기사</td>
                         <td><span class="status pass">합격</span></td>
                         <td><button class="btn-search">찾기</button></td>
@@ -167,7 +134,7 @@
                     <tr>
                         <td>2026년 정기 기사 1회</td>
                         <td>실기</td>
-                        <td><span class="exam-number" onclick="updateAndScrollDetail('26002852', '2026년 정기 기사 1회 (실기) - 정보처리기사', '필답형', '51', '51', '불합격', '#888888')">26002852</span></td>
+                        <td><span class="exam-number" onclick="openResultWindow('26002852', '2026년 정기 기사 1회 (실기) - 정보처리기사', '필답형', '51', '51', '불합격', '#888888')">26002852</span></td>
                         <td>정보처리기사</td>
                         <td><span class="status fail">불합격</span></td>
                         <td><button class="btn-search">찾기</button></td>
@@ -175,10 +142,43 @@
                     <tr>
                         <td>2026년 정기 기사 1회</td>
                         <td>필기</td>
-                        <td><span class="exam-number" onclick="updateAndScrollDetail('26002852', '2026년 정기 기사 1회 (필기) - 정보처리기사', '객관식', '75', '75', '합격', '#0066cc')">26002852</span></td>
+                        <td><span class="exam-number" onclick="openResultWindow('26002852', '2026년 정기 기사 1회 (필기) - 정보처리기사', '객관식', '75', '75', '합격', '#0066cc')">26002852</span></td>
                         <td>정보처리기사</td>
                         <td><span class="status pass">합격</span></td>
                         <td><button class="btn-search">찾기</button></td>
                     </tr>
                 </tbody>
             </table>
+
+            <div class="congratulations-box">
+                "이수현님 정보처리기사 자격시험 조회를 환영합니다. 수험번호를 클릭하시면 새 창에서 상세 점수 확인이 가능합니다."
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // 수험번호를 누르면 동적으로 HTML 문서를 임시 생성하여 새 창(새 탭)으로 띄워주는 기술
+        function openResultWindow(examNo, title, type, score, total, result, resultColor) {
+            
+            // 1. 새 창 열기 (가로 900, 세로 700 규격)
+            var newWindow = window.open("", "_blank", "width=920,height=720,scrollbars=yes,resizable=yes");
+            
+            // 2. 새 창 내부에 주입할 결과확인 UI 전용 HTML/CSS 설계
+            var htmlContent = `
+            <!DOCTYPE html>
+            <html lang="ko">
+            <head>
+                <meta charset="UTF-8">
+                <title>Q-Net 결과확인 상세조회</title>
+                <style>
+                    body { font-family: 'Malgun Gothic', sans-serif; padding: 30px; background-color: #fff; color: #333; line-height: 1.6; }
+                    .info-top-alert { font-size: 14px; color: #333; margin-bottom: 25px; position: relative; padding-left: 12px; }
+                    .info-top-alert::before { content: '•'; position: absolute; left: 0; color: #0066cc; }
+                    .info-top-alert red { color: #ff3333; font-weight: bold; }
+                    
+                    .section-sub-title { font-size: 24px; font-weight: bold; color: #111; margin-bottom: 15px; }
+                    .detail-table-title { background-color: #d9e2f3; border: 1px solid #b4c6e7; padding: 12px 20px; font-size: 14px; font-weight: bold; color: #222; }
+                    
+                    .detail-table { width: 100%; border-collapse: collapse; font-size: 14px; text-align: center; margin-bottom: 25px; border: 1px solid #b4c6e7; }
+                    .detail-table th { background-color: #d9e2f3; color: #222; font-weight: bold; padding: 15px 10px; border-right: 1px solid #b4c6e7; border-bottom: 1px solid #b4c6e7; }
+                    .detail-table td { padding: 18px 10px; border-bottom: 1px solid #e1e4e9; border-right: 1px solid #e1e4e9; background-color: #fff; }
