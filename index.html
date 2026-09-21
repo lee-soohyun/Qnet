@@ -63,9 +63,14 @@
         .congratulations-box strong { color: #0066cc; font-weight: bold; }
 
         /* ======================================================== */
-        /* 3. 스크롤 다운 시 나타나는 [결과확인] 상세 영역 (새로 요청하신 부분) */
+        /* 3. 하단 [결과확인] 상세 영역 스타일 */
         /* ======================================================== */
-        .detail-section { border-top: 1px solid #ddd; padding-top: 40px; margin-top: 20px; }
+        .detail-section { 
+            display: none; /* 💡 수험번호를 클릭하기 전까지는 화면에서 완전히 숨깁니다. */
+            border-top: 1px solid #ddd; 
+            padding-top: 40px; 
+            margin-top: 20px; 
+        }
         
         /* 안내 문구 공통 상단 스타일 */
         .info-top-alert { font-size: 14px; line-height: 1.6; color: #333; margin-bottom: 30px; position: relative; padding-left: 12px; }
@@ -156,7 +161,8 @@
                     <tr>
                         <td>2026년 정기 기사 2회</td>
                         <td>실기</td>
-                        <td><span class="exam-number" onclick="scrollToDetail()">26201106</span></td>
+                        <!-- 수험번호를 클릭하면 스크립트 함수가 호출됩니다 -->
+                        <td><span class="exam-number" onclick="showAndScrollToDetail()">26201106</span></td>
                         <td>정보처리기사</td>
                         <td><span class="status pass">합격</span></td>
                         <td><button class="btn-search">찾기</button></td>
@@ -164,7 +170,7 @@
                     <tr>
                         <td>2026년 정기 기사 1회</td>
                         <td>실기</td>
-                        <td><span class="exam-number">26002852</span></td>
+                        <td><span class="exam-number" onclick="showAndScrollToDetail()">26002852</span></td>
                         <td>정보처리기사</td>
                         <td><span class="status fail">불합격</span></td>
                         <td><button class="btn-search">찾기</button></td>
@@ -172,7 +178,7 @@
                     <tr>
                         <td>2026년 정기 기사 1회</td>
                         <td>필기</td>
-                        <td><span class="exam-number">26002852</span></td>
+                        <td><span class="exam-number" onclick="showAndScrollToDetail()">26002852</span></td>
                         <td>정보처리기사</td>
                         <td><span class="status pass">합격</span></td>
                         <td><button class="btn-search">찾기</button></td>
